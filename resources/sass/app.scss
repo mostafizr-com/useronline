@@ -1,0 +1,46 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import "~fontawesome/scss/fontawesome";;
+
+*{
+  margin: 0;
+  padding: 0;
+}
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.user-social{
+  float: right;
+}
+.list-item{
+  list-style: none;
+}
+.list-group-item{
+  padding: 2px 10px;
+}
+.card-body{
+  padding:10px;
+}
+.disabled{
+  border:0px; 
+}
+.user-avater{
+  height: 25px;
+  width: 25px;
+  border-radius:50%;
+}
+.user-profile-avater{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
