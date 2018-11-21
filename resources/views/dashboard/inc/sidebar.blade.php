@@ -1,14 +1,13 @@
 <div class="col-md-3">
 
-    <div class="card-body">
-                        
+    <div class="card-body">    
         <a class="dropdown-item" href="{{ route('allusers') }}">
             <span class="text-muted"><i class="fas fa-users"></i> All users</span>
         </a>
 
         <div class="dropdown-divider"></div>
  
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="{{ route('user.articles', Auth::user()->username) }}">
             <span class="text-muted"><i class="fas fa-rss"></i>  My articles</span>
         </a>
 
@@ -40,7 +39,9 @@
 
 
 
-    <h6 class="card-header">Users are online</h6>
+    <div class="card-header">
+        <span class="text-muted">Users are online</span>
+    </div>
     <div class="card-body">  
         @foreach ($users as $user)
         @if ($user->is_online())

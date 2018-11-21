@@ -64,11 +64,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $image = (isset($data['image'])) ? $data['image'] : '';
+
+        $auth_method = (isset($data['auth_method'])) ? $data['auth_method'] : 'default';
+        
         return User::create([
             'name' => $data['name'],
             'username' => $data['username'],
+            'image' => $image,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'auth_method' => $auth_method,
         ]);
     }
 }

@@ -25,7 +25,7 @@
                             </textarea> 
                         </div>
 
-                        <a class="btn btn-danger" href="{{ route('category.index') }}">CANCEL</a>
+                        <a class="btn btn-danger" href="{{ URL::previous() }}">CANCEL</a>
                         <button type="submit" class="btn btn-primary">SAVE</button>
                     </form>
                 </div>

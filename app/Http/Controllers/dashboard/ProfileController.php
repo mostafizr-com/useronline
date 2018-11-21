@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Redirect;
 use Auth;
+use App\Post;
 
 class ProfileController extends Controller
 {
@@ -33,6 +34,13 @@ class ProfileController extends Controller
         $data['user'] = User::where('username', $user)->first();
 
         return view('dashboard/pages/profile/edit', $data);        
+    }
+
+    function articles()
+    {
+        $data['sidebar'] = $this->dashboard_sidebar();
+        $data['posts'] = Post::where('author_id', Auth::user()->id)->latest()->get();
+        return view('dashboard/pages/profile/myarticles', $data);
     }
 
     function update(Request $rq, $user)

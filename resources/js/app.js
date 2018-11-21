@@ -19,5 +19,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('ok-user', require('./components/OkComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    created(){
+        Echo.private('testChannel')
+        .listen('TaskEvent', (e) => {
+            console.log(e);
+        });        
+    }
 });

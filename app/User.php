@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cache;
+use App\Post;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'name', 
         'username', 
@@ -28,6 +31,7 @@ class User extends Authenticatable
         'github', 
         'userbrief',
         'password',
+        'auth_method'
     ];
 
     /**
@@ -39,9 +43,35 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
     function username()
     {
       return $this->username;
+    }
+
+    function user_role()
+    {
+        if($this->user_role == 3)
+        {
+           return "Subscriber"; 
+        }
+        elseif($this->user_role == 2)
+        {
+           return "Author";
+        }
+        elseif($this->user_role == 1)
+        {
+            return "Moderator";
+        }
+        elseif($this->user_role == 0)
+        {
+            return "Admin";
+        }
     }
 
     function is_online()

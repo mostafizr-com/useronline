@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row ">
 
          {!! $sidebar !!}
 
@@ -17,37 +17,23 @@
                   
                     <div class="row">
                         @foreach ($users as $user)
-                        <div class="col-md-4">
-                                <div class="card user_card">
+                        <div class="col-md-3">
+                                
                                 <div class="text-center" style="padding:20px">
+                                <a href="{{ route('profile', $user->username) }}" class="text-muted">
                                     @if($user->image != "")  
                                     <img src="{{ asset($user->image) }}" 
                                     style="width:100px; height:100px; border-radius:50%;" alt="{{ $user->name }}">
                                     @else
                                     <img src="{{ asset('public/defaults/user-male.png') }}"
                                         style="width:100px; height:100px; border-radius:50%;" alt="{{ $user->name }}"> 
-                                    @endif   
+                                    @endif  
+                                    
+                                    <h6 style="margin:5px 0px;"> {{ $user->name }} </h6>
+                                </a>
                                 </div>
-                                    <p class="name">{{ $user->name }}</p>
-                                    <p>{{ $user->created_at->toDateString() }}</p>
-                                    <div style="margin: 10px 0;">
-                                        <a href="http://{{ $user->facebook }}">
-                                            <i class="fab fa-facebook"></i>
-                                        </a> 
-                                        <a href="http://{{ $user->twitter }}">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>  
-                                        <a href="http://{{ $user->google }}">
-                                            <i class="fab fa-google-plus"></i>
-                                        </a>  
-                                        <a href="http://{{ $user->github }}">
-                                            <i class="fab fa-github"></i>
-                                        </a> 
-                                    </div>
-                                    <p>
-                                      <a href="{{ route('profile', $user->username) }}">VIEW PROFILE</a>
-                                    </p>
-                                </div><br>
+                                
+                                
                         </div>       
                         @endforeach
 
@@ -97,7 +83,6 @@
 
         a {
           text-decoration: none;
-          font-size: 22px;
           color: black;
         }
         

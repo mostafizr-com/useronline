@@ -54,7 +54,7 @@
                         <div class="dropdown-menu dropdown-menu-right user-popup" aria-labelledby="navbarDropdown">
                         
                             <a class="dropdown-item" href="{{ route('profile', Auth::user()->username) }}">
-                                <span class="text-muted"><i class="fas fa-cog"></i> Profile settings</span>
+                                <span class="text-muted"><i class="fas fa-cog"></i> Profile</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">
@@ -67,11 +67,11 @@
 
                             <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('post.index') }}">
                                 <span class="text-muted"><i class="fas fa-rss"></i>  My articles</span>
                             </a>
     
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('post.create') }}">
                                 <span class="text-muted"><i class="fas fa-edit"></i> Write article</span>
                             </a>
 

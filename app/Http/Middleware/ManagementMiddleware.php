@@ -7,7 +7,7 @@ use Request;
 use Redirect;
 use Auth;
 
-class CheckUserMiddleware
+class ManagementMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,10 @@ class CheckUserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->username != Request::segment(2) && Auth::user()->id != Request::segment(2) )
+        if( Auth::user()->user_role() != "Admin" &&  
+            Auth::user()->user_role() != "Moderator" )
         {
-            return Redirect::route('profile', Auth::user()->username);
+           return Redirect::route('profile', Auth::user()->username);   
         }
         return $next($request);
     }

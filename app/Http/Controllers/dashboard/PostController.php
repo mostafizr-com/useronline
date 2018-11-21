@@ -5,7 +5,10 @@ namespace App\Http\Controllers\dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
+use App\Tag;
 use Redirect;
+use Auth;
 
 class PostController extends Controller
 {
@@ -31,6 +34,9 @@ class PostController extends Controller
     public function create()
     {
         $data['sidebar'] = $this->dashboard_sidebar();
+        $data['cats'] = Category::orderBy('name', 'ASC')->get();
+        $data['tags'] = Tag::orderBy('name', 'ASC')->get();
+
         return view('dashboard/pages/post/create', $data);
     }
 
@@ -42,13 +48,19 @@ class PostController extends Controller
      */
     public function store(Request $rq )
     {
+        // dd($rq->all());
+
         $data = new Post();
+        $data->author_id = Auth::user()->id;
         $data->title = $rq->title;
-        $data->slug = str_slug($rq->title);
+        $data->slug = $rq->slug;
         $data->description = $rq->description;
         $data->save();
 
-        return Redirect::route('post.edit', $data->id);
+        $data->categories()->sync($rq->category, false);
+        $data->tags()->sync($rq->tag, false);
+
+        return Redirect::route('post.show', $data->id);
     }
 
     /**
@@ -59,7 +71,13 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        echo"show";
+        $data['sidebar'] = $this->dashboard_sidebar();
+        
+        $data['post'] = Post::where('id', $id)->first();
+        $data['cats'] = Category::orderBy('name', 'ASC')->get();
+        $data['tags'] = Tag::orderBy('name', 'ASC')->get();
+
+        return view('dashboard/pages/post/show',$data);
     }
 
     /**
@@ -73,6 +91,8 @@ class PostController extends Controller
         $data['sidebar'] = $this->dashboard_sidebar();
         
         $data['post'] = Post::where('id', $id)->first();
+        $data['cats'] = Category::orderBy('name', 'ASC')->get();
+        $data['tags'] = Tag::orderBy('name', 'ASC')->get();
 
         return view('dashboard/pages/post/edit',$data);
      }
@@ -86,15 +106,19 @@ class PostController extends Controller
      */
     public function update(Request $rq, $id)
     {
-        // print_r($id); die;
+        // dd($rq->all());
 
         $data = Post::findOrFail($id);
+        $data->author_id = Auth::user()->id;
         $data->title = $rq->title;
-        $data->slug = str_slug($rq->title);
+        $data->slug = $rq->slug;
         $data->description = $rq->description;
         $data->save();
 
-        return Redirect::route('post.edit', $id);
+        $data->categories()->sync($rq->category);
+        $data->tags()->sync($rq->tag);
+
+        return Redirect::route('post.show', $id);
     }
 
     /**

@@ -38,7 +38,7 @@
                                     <img class="img-thumbnail avatar" style="width:80%" 
                                     src="{{ asset($user->image) }}">
                                 @else
-                                    <img class="img-thumbnail" style="width:80%; overflow:hidden"
+                                    <img class="img-thumbnail avatar" style="width:80%; overflow:hidden"
                                     src="{{ asset('public/defaults/user-male.png') }}"> 
                                 @endif
                             </div>

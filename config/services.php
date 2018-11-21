@@ -35,4 +35,29 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),         // Your GitHub Client ID
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'), // Your GitHub Client Secret
+        'redirect' => env('FACEBOOK_LOGIN_REDIRECT'),
+    ],
+
+    'twitter' => [
+        'client_id' => env('TWITTER_CLIENT_ID'),         // Your GitHub Client ID
+        'client_secret' => env('TWITTER_CLIENT_SECRET'), // Your GitHub Client Secret
+        'redirect' => env('TWITTER_LOGIN_REDIRECT'),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),         // Your GitHub Client ID
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'), // Your GitHub Client Secret
+        'redirect' => env('GOOGLE_LOGIN_REDIRECT'),
+    ],
+
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),         // Your GitHub Client ID
+        'client_secret' => env('GITHUB_CLIENT_SECRET'), // Your GitHub Client Secret
+        'redirect' => env('GITHUB_LOGIN_REDIRECT'),
+    ],
+
+
 ];

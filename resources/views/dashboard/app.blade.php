@@ -15,10 +15,14 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" href="{{ asset('public/css/multiselect.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/bootstrap-select.css') }}">
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <script src="{{ asset('public/js/app.js') }}"></script>
+  
+    @stack('css')
 
     <style>
        .user-popup{
@@ -27,9 +31,17 @@
            z-index: 9999;
        }
        .card{
+          
           border-radius: 0px !important;
        }
-    
+       .card-header{
+           border-bottom: 0px;
+       }
+       .readonly{
+           background: #EFEFEF;
+           border: 0px;
+       }
+
     </style>
 
 </head>
@@ -53,14 +65,27 @@
             selector: "#editor",
             theme: "modern",
             height: 300,
+
             plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons template paste textcolor colorpicker textpattern imagetools'
+            'autolink lists link charmap preview hr anchor pagebreak',
+            'searchreplace visualblocks visualchars code',
+            'insertdatetime media table contextmenu',
+            'emoticons template paste textcolor colorpicker textpattern codesample'
             ],
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            toolbar: 'undo redo | sizeselect fontselect fontsizeselect | bold italic  | hr alignleft aligncenter alignright alignjustify | bullist numlist link | forecolor backcolor emoticons | codesample | blockquote code ',
+            max_width: 100, 
+            height:300,
+            menubar: false,
+            resize: true,
+            statusbar: true,
+            body_class: 'my_tinny_mce',
+
+            nowrap : false,   
+            // element_format : 'html',
+            relative_urls: false, //Most Important
+            remove_script_host: false,
+            theme: 'modern',
+            mobile: { theme: 'mobile' },
             image_advtab: true
             
         });
@@ -70,6 +95,11 @@
     });
 </script> 
 
+<script src="{{ asset('public/js/bootstrap-multiselect.js') }}"></script>
+
+<script src="{{ asset('public/js/multiselect.js') }}"></script>
+
+@stack('scripts')
 
 </body>
 </html>

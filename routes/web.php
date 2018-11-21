@@ -10,6 +10,11 @@
 |
 */
 
+use App\Events\TaskEvent;
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,18 +32,42 @@ function(){
     Route::get('/dasdhboard/{user}/profile', 'ProfileController@index')->name('profile');
 
     Route::group(array(
-        'middleware' => 'checkUser'
+        'middleware' => 'checkAuthor'
     ), 
     function(){  
-      Route::get('/dasdhboard/{user}/profile-edit', 'ProfileController@edit')->name('profile.edit');
-      Route::put('/dasdhboard/{id}/profile-update', 'ProfileController@update')->name('profile.update');
+        Route::get('/dasdhboard/{user}/profile-edit', 'ProfileController@edit')->name('profile.edit');
+        Route::put('/dasdhboard/{id}/profile-update', 'ProfileController@update')->name('profile.update');
+        Route::get('/dasdhboard/{user}/articles', 'ProfileController@articles')->name('user.articles');
     });
 
     Route::get('/dashboard/all-users/', 'ProfileController@all_users')->name('allusers');
 
-    Route::resource('/dashboard/category', 'CategoryController');
-    Route::resource('/dashboard/tag', 'TagController');
+    Route::group(array(
+        'middleware' => 'checkManage'
+    ), function(){
+        Route::resource('/dashboard/category', 'CategoryController');
+        Route::resource('/dashboard/tag', 'TagController');
+    });
+
+
     Route::resource('/dashboard/post', 'PostController');
 
+});
+
+Route::post('update/social/info', 'Auth\LoginController@socialUpdateInfo')->name('update.social.info');
+
+//Social login routes
+Route::get('login/social/{method}', 'Auth\LoginController@socialLoginRedirect')->name('social.login');
+
+//Social Callback functionality
+Route::get('login/{method}/callback', 'Auth\LoginController@providerCallback');
+
+
+Route::get('event', function(){
+    event(new TaskEvent("Hey how are you?"));
+});
+
+Route::get('listener', function(){
+    return view('listenBrodcast');
 });
 

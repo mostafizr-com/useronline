@@ -20,12 +20,14 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('user_role')->default(3);
             $table->text('userbrief')->nullable();
             $table->string('mobile')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('google')->nullable();
             $table->string('github')->nullable();
+            $table->string('auth_method')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
